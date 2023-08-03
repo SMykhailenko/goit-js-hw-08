@@ -34,5 +34,6 @@ const storageData = load(LOCALSTORAGE_KEY);
 if (storageData) {
   Object.entries(storageData).forEach(([key, val]) => {
     form.elements[key].value = val;
+    currentState[key] = val;
   });
 }
