@@ -10,10 +10,7 @@ form.addEventListener(
   'input',
   throttle(e => {
     const objectToSave = (currentState[e.target.name] = e.target.value.trim());
-    localStorage.setItem(
-      LOCALSTORAGE_KEY,
-      JSON.stringify({ [e.target.name]: objectToSave })
-    );
+    localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify({ ...currentState }));
   }, 500)
 );
 
@@ -35,7 +32,7 @@ const load = key => {
 
 const storageData = load(LOCALSTORAGE_KEY);
 if (storageData) {
-  Object.entries(currentState).forEach(([key, val]) => {
+  Object.entries(storageData).forEach(([key, val]) => {
     form.elements[key].value = val;
   });
 }
