@@ -10,14 +10,17 @@ form.addEventListener(
   'input',
   throttle(e => {
     const objectToSave = (currentState[e.target.name] = e.target.value.trim());
-    localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(objectToSave));
+    localStorage.setItem(
+      LOCALSTORAGE_KEY,
+      JSON.stringify({ [e.target.name]: objectToSave })
+    );
   }, 500)
 );
 
 form.addEventListener('submit', e => {
   e.preventDefault();
   console.log(currentState);
-  form.reset();
+  e.target.reset();
   localStorage.removeItem(LOCALSTORAGE_KEY);
 });
 
